@@ -21,6 +21,11 @@ include('panelBuilder.php');
 include('collector.php');
 include('../data/jenkins-transform.php'); 
 
+$panel = $_GET["panel"];
+$metric = $_GET["stat"];
+$start = $_GET["start"]; 
+$end = $_GET["end"]; 
+
 $temp_config = array( 'admin' => array(
 										'panel' => 1,
 										'source' => 'jenkins',
