@@ -1,0 +1,32 @@
+section{
+width:500px;
+height:315px;
+border-style:solid;
+border-color:black;
+}
+
+div{
+width:450px;
+height:250px;
+}
+#graph1{
+position: absolute;
+margin-top: 0px;
+margin-left: 30px;
+}
+
+#panel3{
+margin-top:5px;
+}
+
+#panel2{
+position:absolute;
+margin-left:515px;
+margin-top:-320px;
+}
+
+#panel4{
+position:absolute;
+margin-top:-320px;
+margin-left:515px;
+}

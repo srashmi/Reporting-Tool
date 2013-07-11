@@ -1,0 +1,21 @@
+<?php include('..\data\variables.php'); 
+
+function buildPanel( config ) {
+
+
+echo "<section id=\"panel1\">";
+
+
+<h3><?php echo $title ?></h3>
+<h4><?php echo $subtitle ?></h4>
+<div id="chart">
+
+<canvas id="one" height=170px width=330px></canvas>
+	
+	
+	echo "</div>";
+	
+echo "</section>";
+
+}
+?>

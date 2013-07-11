@@ -1,0 +1,67 @@
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+		
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script type="text/javascript">
+$(function () {
+
+		var obj = {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Monthly Average Rainfall'
+            },
+            subtitle: {
+                text: 'Source: WorldClimate.com'
+            },
+            xAxis: {
+                categories: [
+                    07,06,05,04,03,02,01,12,11,10,09,08
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: ''
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: "number of failures",
+                data : [1,0,0,0,0,0,0,0,0,0,0,0]
+    
+            }]
+        };
+        console.log(obj);
+        $('#container').highcharts(obj);
+    });
+    
+
+		</script>
+	</head>
+	<body>
+
+<script src="/Users/rshekhar/template1/artifacts/js/highcharts.js"></script>
+<script src="/Users/rshekhar/template1/artifacts/js/modules/exporting.js"></script>
+<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
+	</body>
+</html>
