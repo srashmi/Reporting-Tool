@@ -6,7 +6,7 @@ class jenkinsTransform{
 public function readGranularData($temp_config){
 //global $json;
 
-$file = "/Library/WebServer/Documents/php_templates/template2/data/granular/jenkinsdata.txt";
+$file = "/Library/WebServer/Documents/gitdocs/Reporting-Tool/template2/data/granular/jenkinsdata.txt";
 $json = json_decode(file_get_contents($file), true);
 //var_dump($json);
 
