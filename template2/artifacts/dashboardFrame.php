@@ -15,25 +15,20 @@
 <body>
 <link rel="stylesheet" type="text/css" href="..\style\style.css">
 <h2>Dashboard</h2>
-<aside><a href="configure.html">Configure Dashboard</a></aside>
+
 <?php 
 include('panelBuilder.php');
 include('collector.php');
-include('../data/jenkins-transform.php');
-
-$panel = $_GET["panel"];
-$metric = $_GET["stat"];
-$start = $_GET["start"]; 
-$end = $_GET["end"]; 
+include('../data/jenkins-transform.php'); 
 
 $temp_config = array( 'admin' => array(
-										'panel' => $panel,
+										'panel' => 1,
 										'source' => 'jenkins',
-										'metric' => $metric
+										'metric' => 'success'
 										), //admin
 					  'range'=> array(
-					  					'start' => $start, //MM-DD-YY
-					  					'end' => $end,
+					  					'start' => '07-07-13', //MM-DD-YY
+					  					'end' => '07-07-13',
 					  				), //range
 					  'aggregateBy' => 'hour',
 					  'chart' => array('chart'=>array('type' => 'column'),
@@ -62,9 +57,9 @@ $temp_config = array( 'admin' => array(
 
 
 // Panel 1
-//$temp_config['admin']['panel']=$panel;
+$temp_config['admin']['panel']=1;
 $temp_config['admin']['source']='jenkins';
-//$temp_config['admin']['metric']=$metric;
+$temp_config['admin']['metric']='success';
 $temp_config['chart']['title']['text'] = 'Successful Builds';
 $temp_config['chart']['subtitle']['text'] = 'Total per week';
 $temp_config['chart']['series'][0]['name']='Number of Successful Builds';
@@ -76,18 +71,18 @@ $res=buildPanel($config);
 echo "<script type=\"text/javascript\">makeGraph(",$config,")</script>";
 
 // Panel 2
-// $temp_config['admin']['panel']=$panel;
-// $temp_config['admin']['source']='jenkins';
-// $temp_config['admin']['metric']=$metric;
-// $temp_config['chart']['series'][0]['name']='Number of Failed Builds';
-// $temp_config['chart']['title']['text'] = 'Failed Builds';
-// $temp_config['chart']['subtitle']['text'] = 'Total per week';
-// $obj = new collector($temp_config);
-// $obj->collectData();
-// $newObject = new jenkinsTransform(); 
-// $config = $newObject->readGranularData($temp_config); 
-// $res=buildPanel($config);
-// echo "<script type=\"text/javascript\">makeGraph(",$config,")</script>";
+$temp_config['admin']['panel']=2;
+$temp_config['admin']['source']='jenkins';
+$temp_config['admin']['metric']='failure';
+$temp_config['chart']['series'][0]['name']='Number of Failed Builds';
+$temp_config['chart']['title']['text'] = 'Failed Builds';
+$temp_config['chart']['subtitle']['text'] = 'Total per week';
+$obj = new collector($temp_config);
+$obj->collectData();
+$newObject = new jenkinsTransform(); 
+$config = $newObject->readGranularData($temp_config); 
+$res=buildPanel($config);
+echo "<script type=\"text/javascript\">makeGraph(",$config,")</script>";
 
 // Panel 3
 // $temp_config['admin']['panel']=3;
