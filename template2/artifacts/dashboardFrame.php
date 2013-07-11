@@ -15,7 +15,7 @@
 <body>
 <link rel="stylesheet" type="text/css" href="..\style\style.css">
 <h2>Dashboard</h2>
-
+<aside><a href="configure.html">Configure Dashboard</a></aside>
 <?php 
 include('panelBuilder.php');
 include('collector.php');
