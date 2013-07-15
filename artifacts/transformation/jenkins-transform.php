@@ -22,7 +22,7 @@ public function readGranularData($temp_config){
         $original_timestamp_end = $json["dimensions"][0]["columns"]["$i"]["end"];
         $timestamp_start          = (int) substr($original_timestamp_start, 0, -3);
         $timestamp_end         = (int) substr($original_timestamp_end, 0, -3);
-        $xval = date('m/d', $timestamp_start)."-".date('m/d', $timestamp_end);
+        $xval = date('m/d', $timestamp_start);//."-".date('m/d', $timestamp_end);
         $yval = $json["dimensions"][0]["values"][$i];
         //array_push($temp_config['chart']['xAxis']['categories'],$xval);
 	   //array_push($temp_config['chart']['series'][0]['data'], $yval);    

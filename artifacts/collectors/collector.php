@@ -1,5 +1,5 @@
 <?php
-//include('pathconfig.php');
+include('pathconfig.php');
 include($jenkins_getter);
 class collector{
 

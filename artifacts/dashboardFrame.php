@@ -3,10 +3,9 @@
 <head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript" src="ui/renderGraph.js"></script>
-<script type="text/javascript" src="ui/js/highcharts.js"></script>
-<script type="text/javascript" src="ui/js/modules/exporting.js"></script>
-
+<script type="text/javascript" src="..\artifacts\ui\renderGraph.js"></script>
+<script type="text/javascript" src="..\artifacts\ui\js\highcharts.js"></script>
+<script type="text/javascript" src="..\artifacts\ui\js\modules\exporting.js"></script>
 <link rel="stylesheet" type="text/css" href="..\style\style.css">
 <title>Dashboard</title>
 </head>
@@ -62,7 +61,7 @@ $temp_config['chart']['title']['text'] = 'Successful Builds';
 $temp_config['chart']['subtitle']['text'] = 'Total per week';
 $temp_config['chart']['series'][0]['name']='Number of Successful Builds';
 $obj = new collector($temp_config);
-$obj->collectData();
+//$obj->collectData();
 $newObject = new jenkinsTransform(); 
 $config = $newObject->readGranularData($temp_config); 
 buildPanel($config);
@@ -76,7 +75,7 @@ $temp_config['chart']['series'][0]['name']='Number of Failed Builds';
 $temp_config['chart']['title']['text'] = 'Failed Builds';
 $temp_config['chart']['subtitle']['text'] = 'Total per week';
 $obj = new collector($temp_config);
-$obj->collectData();
+//$obj->collectData();
 $newObject = new jenkinsTransform(); 
 $config = $newObject->readGranularData($temp_config); 
 $res=buildPanel($config);

@@ -7,8 +7,10 @@ $dashboard_frame = $base."/artifacts/dashboardFrame.php";
 $jenkins_transform = $base."/artifacts/transformation/jenkins-transform.php";
 $jenkins_getter = $base."/artifacts/collectors/jenkinsGetter.php";
 $panel_builder = $base."/artifacts/ui/panelBuilder.php";
-$render_graph = $base."/artifacts/ui/renderGraph.js";
 $transform = $base."/artifacts/transformation/transform.php";
+$render_graph = "\Library\WebServer\Documents\gitdocs\Reporting-Tool\artifacts\ui\\renderGraph.js";
+$highcharts = "\Library\WebServer\Documents\gitdocs\Reporting-Tool\artifacts\ui\js\highcharts.js";
+$exportingjs = "\Library\WebServer\Documents\gitdocs\Reporting-Tool\artifacts\ui\js\modules\exporting.js";
 // Data files
 $jenkins_data = $base."/data/granular/jenkinsdata.txt";
 

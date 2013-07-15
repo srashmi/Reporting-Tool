@@ -1,8 +1,8 @@
 <?php
-//fetchFromJenkins();
+fetchFromJenkins();
 function fetchFromJenkins(){
 
-//include('pathconfig.php');
+include('../pathconfig.php');
 $granData = file_get_contents($jenkins_api);
 //echo $granData;
 file_put_contents($jenkins_data, $granData);
