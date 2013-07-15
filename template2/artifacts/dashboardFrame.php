@@ -1,25 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script type="text/javascript" src="..\style\chartformatting.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript" src="..\artifacts\renderGraph3.js"></script>
-
-<script type="text/javascript" src="..\artifacts\js\highcharts.js"></script>
-<script type="text/javascript" src="..\artifacts\js\modules\exporting.js"></script>
+<script type="text/javascript" src="renderGraph.js"></script>
+<script type="text/javascript" src="js/highcharts.js"></script>
+<script type="text/javascript" src="js/modules/exporting.js"></script>
 
 <link rel="stylesheet" type="text/css" href="..\style\style.css">
 <title>Dashboard</title>
 </head>
 <body>
-<link rel="stylesheet" type="text/css" href="..\style\style.css">
 <h2>Dashboard</h2>
 
 <?php 
-include('panelBuilder.php');
-include('collector.php');
-include('../data/jenkins-transform.php'); 
+include('pathconfig.php');
+include($panel_builder);
+include($collector);
+include($jenkins_transform); 
 
 $temp_config = array( 'admin' => array(
 										'panel' => 1,
@@ -67,7 +65,7 @@ $obj = new collector($temp_config);
 $obj->collectData();
 $newObject = new jenkinsTransform(); 
 $config = $newObject->readGranularData($temp_config); 
-$res=buildPanel($config);
+buildPanel($config);
 echo "<script type=\"text/javascript\">makeGraph(",$config,")</script>";
 
 // Panel 2
@@ -84,32 +82,6 @@ $config = $newObject->readGranularData($temp_config);
 $res=buildPanel($config);
 echo "<script type=\"text/javascript\">makeGraph(",$config,")</script>";
 
-// Panel 3
-// $temp_config['admin']['panel']=3;
-// $newObject = new transform(); 
-// $config_local = $newObject->readGranularData($temp_config); 
-// $config=json_encode($config_local);
-// $res=buildPanel($config_local);
-// echo "<script type=\"text/javascript\">makeGraph(",$config,")</script>";
-// 
-// Panel 4
-// $temp_config['admin']['panel']=4;
-// $newObject = new transform(); 
-// $config_local = $newObject->readGranularData($temp_config); 
-// $config=json_encode($config_local);
-// $res=buildPanel($config_local);
-// echo "<script type=\"text/javascript\">makeGraph(",$config,")</script>";
-
-/*
-
-//Panel 4
-
-$config_local[panel]=4;
-$config=json_encode($config_local);
-$res=buildPanel($config);
-echo "<script type=\"text/javascript\">makeGraph(",$config,")</script>";
-
-*/
 ?>
 
 </body>

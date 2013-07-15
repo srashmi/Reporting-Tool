@@ -1,6 +1,6 @@
 <?php
-include('jenkinsGetter.php');
-
+include('pathconfig.php');
+include($jenkins_getter);
 class collector{
 
 protected $source;
