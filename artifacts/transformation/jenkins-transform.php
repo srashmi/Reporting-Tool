@@ -1,6 +1,10 @@
 <?php
-//include($transform);
-class jenkinsTransform{
+include($transform);
+class jenkinsTransform extends transform{
+
+public function __construct(){
+    //super();
+}
 
 public function readGranularData($temp_config){
 //global $json;

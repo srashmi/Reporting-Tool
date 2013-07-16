@@ -19,4 +19,5 @@ $style = $base."/style/style.css";
 
 // Other variables
 $jenkins_api = 'http://localhost:8080/plugin/global-build-stats/api/json?depth=2&buildStatConfigId=awbQveOEOckFL*8Ex4*AbbZWff1SByGq';
+//$jenkins_api = 'http://Build.cd.go.com/plugin/global-build-stats/api/json?depth=2&buildStatConfigId=ZJjA1!!pebeZ$PKsr703x2ReQ7K6OMCU';
 ?>
