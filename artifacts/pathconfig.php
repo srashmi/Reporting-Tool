@@ -11,9 +11,13 @@ $transform = $base."/artifacts/transformation/transform.php";
 $render_graph = "\Library\WebServer\Documents\gitdocs\Reporting-Tool\artifacts\ui\\renderGraph.js";
 $highcharts = "\Library\WebServer\Documents\gitdocs\Reporting-Tool\artifacts\ui\js\highcharts.js";
 $exportingjs = "\Library\WebServer\Documents\gitdocs\Reporting-Tool\artifacts\ui\js\modules\exporting.js";
+$panel = $base."/artifacts/panel.php";
 // Data files
 $jenkins_data = $base."/data/granular/jenkinsdata.txt";
-
+$jenkins_data_ci = $base."/data/granular/jenkins_data_ci.txt";
+$jenkins_data_master = $base."/data/granular/jenkins_data_master.txt";
+$jenkins_data_pr = $base."/data/granular/jenkins_data_pr.txt";
+$jenkins_data_sonar = $base."/data/granular/jenkins_data_sonar.txt";
 // Styling files
 $style = $base."/style/style.css";
 

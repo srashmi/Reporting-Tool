@@ -15,14 +15,14 @@ margin-top: 0px;
 margin-left: 30px;
 }
 
-#panel3{
-margin-top:5px;
-}
-
 #panel2{
 position:absolute;
 margin-left:515px;
 margin-top:-320px;
+}
+
+#panel3{
+margin-top:5px;
 }
 
 #panel4{
