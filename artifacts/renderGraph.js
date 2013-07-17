@@ -6,6 +6,7 @@ function makeGraph(config){
 			console.log("renderingPanel: ",renderingPanel);
 			
 			x = [];
+			console.log("Test!!! ");//obj.chart.series");
 			for( var i in obj.chart.series ) {
     			x[i] = obj.chart.series[i];
     			console.log(obj.chart.series[i]);

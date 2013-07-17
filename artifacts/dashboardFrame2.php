@@ -43,58 +43,67 @@ $temp_config = array( 'admin' => array(
 															), //tooltip
 										 'plotOptions' => array('column' => array(
 																		'pointPadding' => 0.2,
-																		'borderWidth' => 0),
-										 						'series' => array(
-										 								'color' => 'black'
-										 								)
-											), //plotoption
-										 'series' => array(array(
-														'name' => "Number of Failures",
-														'data' => array()
-												))//series
+																		'borderWidth' => 0
+																		)
+										 						
+															),//plotoption
+										 'series' => array(
+													 		array(
+																	'name' => "Number of Successful Builds",
+																	'data' => array()
+															),
+															array(
+																	'name' => "Number of Failed Builds",
+																	'data' => array()
+															),
+															
+												)//series
  									) //chart
  					);
 
 //Panel 1
 $panel1_config = $temp_config;
 $panel1_config['admin']['panel']=1;
-$panel1_config['chart']['title']['text'] = 'All Builds';
+$panel1_config['chart']['title']['text'] = 'Build Statistics - All Jobs';
 $panel1_config['chart']['subtitle']['text'] = 'Total per week';
-$panel1_config['chart']['series'][0]['name']='Number of Successful Builds';
-$panel1_config['chart']['plotOptions']['series']['color']='green';
+//$panel1_config['chart']['series'][0]['name']='Number of Successful Builds';
+//$panel1_config['chart']['series'][1]['name']='Number of Failed Builds';
+//$panel1_config['chart']['plotOptions']['series']['color']='green';
 
 //Panel 2
 $panel2_config = $temp_config;
 $panel2_config['admin']['panel']=2;
-$panel2_config['chart']['series'][0]['name']='Number of Failed Builds';
-$panel2_config['chart']['title']['text'] = 'Failed CI Builds';
+//$panel2_config['chart']['series'][0]['name']='Number of Failed Builds';
+$panel2_config['chart']['title']['text'] = 'Build Statistics - CI';
 $panel2_config['chart']['subtitle']['text'] = 'Total per week';
-$panel2_config['chart']['plotOptions']['series']['color']='#C34A2C';
+//$panel2_config['chart']['plotOptions']['series']['color']='#C34A2C';
 
 //Panel 3
 $panel3_config = $temp_config;
 $panel3_config['admin']['panel']=3;
-$panel3_config['chart']['series'][0]['name']='Number of Successful Builds';
-$panel3_config['chart']['title']['text'] = 'Successful Master Builds';
+//$panel3_config['chart']['series'][0]['name']='Number of Successful Builds';
+$panel3_config['chart']['title']['text'] = 'Build Statistics - PR';
 $panel3_config['chart']['subtitle']['text'] = 'Total per week';
-$panel3_config['chart']['plotOptions']['series']['color']='green';
+//$panel3_config['chart']['plotOptions']['series']['color']='green';
 
 //Panel 4
 $panel4_config = $temp_config;
 $panel4_config['admin']['panel']=4;
-$panel4_config['chart']['series'][0]['name']='Number of Failed Builds';
-$panel4_config['chart']['title']['text'] = 'Failed Master Builds';
+//$panel4_config['chart']['series'][0]['name']='Number of Failed Builds';
+$panel4_config['chart']['title']['text'] = 'Build Statistics - Master';
 $panel4_config['chart']['subtitle']['text'] = 'Total per week';
-$panel4_config['chart']['plotOptions']['series']['color']='#C34A2C';
+//$panel4_config['chart']['plotOptions']['series']['color']='#C34A2C';
 
 // panelObject = new Panel(transformationObj, panelConfig)
-// jenkinsTransformObject = new jenkinsTransform('success'|'failure'|'unstable'|'aborted'|'not_built','ci','master','pr','sonar')
+// jenkinsTransformObject = new jenkinsTransform(array('success'|'failure'|'unstable'|'aborted'|'not_built'|'all'),'ci','master','pr','sonar')
+ 
  $panels = array(
- 	new Panel(new jenkinsTransform('success','all'), $panel1_config),
- 	new Panel(new jenkinsTransform('failure','ci'), $panel2_config),
- 	new Panel(new jenkinsTransform('success','pr'), $panel3_config),
- 	new Panel(new jenkinsTransform('failure','master'), $panel4_config)
+ 	new Panel(new jenkinsTransform(array('success','failure'),'all'), $panel1_config),
+ 	new Panel(new jenkinsTransform(array('success','failure'),'ci'), $panel2_config),
+ 	new Panel(new jenkinsTransform(array('success','failure'),'pr'), $panel3_config),
+ 	new Panel(new jenkinsTransform(array('success','failure'),'master'), $panel4_config)
  );
+
 
 foreach($panels as $panel) {
 	$panel->printHtml();
