@@ -20,6 +20,7 @@ class jenkinsTransform extends transform{
                 case 'master': $this->input_file=$jenkins_data_master; break;
                 case 'pr': $this->input_file=$jenkins_data_pr; break;
                 case 'sonar': $this->input_file=$jenkins_data_sonar; break;
+                case 'all': $this->input_file=$jenkins_data; break;
                 default: echo "No matching case-",$job;
         }
         

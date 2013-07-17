@@ -58,7 +58,7 @@ $temp_config = array( 'admin' => array(
 //Panel 1
 $panel1_config = $temp_config;
 $panel1_config['admin']['panel']=1;
-$panel1_config['chart']['title']['text'] = 'Successful CI Builds';
+$panel1_config['chart']['title']['text'] = 'All Builds';
 $panel1_config['chart']['subtitle']['text'] = 'Total per week';
 $panel1_config['chart']['series'][0]['name']='Number of Successful Builds';
 $panel1_config['chart']['plotOptions']['series']['color']='green';
@@ -69,7 +69,7 @@ $panel2_config['admin']['panel']=2;
 $panel2_config['chart']['series'][0]['name']='Number of Failed Builds';
 $panel2_config['chart']['title']['text'] = 'Failed CI Builds';
 $panel2_config['chart']['subtitle']['text'] = 'Total per week';
-$panel2_config['chart']['plotOptions']['series']['color']='red';
+$panel2_config['chart']['plotOptions']['series']['color']='#C34A2C';
 
 //Panel 3
 $panel3_config = $temp_config;
@@ -85,12 +85,12 @@ $panel4_config['admin']['panel']=4;
 $panel4_config['chart']['series'][0]['name']='Number of Failed Builds';
 $panel4_config['chart']['title']['text'] = 'Failed Master Builds';
 $panel4_config['chart']['subtitle']['text'] = 'Total per week';
-$panel4_config['chart']['plotOptions']['series']['color']='red';
+$panel4_config['chart']['plotOptions']['series']['color']='#C34A2C';
 
 // panelObject = new Panel(transformationObj, panelConfig)
 // jenkinsTransformObject = new jenkinsTransform('success'|'failure'|'unstable'|'aborted'|'not_built','ci','master','pr','sonar')
  $panels = array(
- 	new Panel(new jenkinsTransform('success','ci'), $panel1_config),
+ 	new Panel(new jenkinsTransform('success','all'), $panel1_config),
  	new Panel(new jenkinsTransform('failure','ci'), $panel2_config),
  	new Panel(new jenkinsTransform('success','pr'), $panel3_config),
  	new Panel(new jenkinsTransform('failure','master'), $panel4_config)
