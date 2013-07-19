@@ -4,7 +4,8 @@ include($transform);
 class jenkinsTransform extends transform{
 
     var $report_metrics=array(); var $input_file;
-
+    var $metric_display_names = array('Successful Builds','Failed Builds','Unstable Builds','Aborted Builds','Not Built');
+    var $metric_display_colors = array('green','#C34A2C','grey','black','blue');
     public function __construct($metrics, $job){
         include('/Library/WebServer/Documents/gitdocs/Reporting-Tool/artifacts/pathconfig.php');
         foreach ($metrics as $metric){
@@ -28,18 +29,18 @@ class jenkinsTransform extends transform{
     }
 
     public function transformData($temp_config){
-        global $report_metric;
-        include('/Library/WebServer/Documents/gitdocs/Reporting-Tool/artifacts/pathconfig.php');
-        //$input_file = $input_file;
-        //echo $this->input_file;
+        global $report_metric; 
+        $metric_display_names = array('Successful Builds','Failed Builds','Unstable Builds','Aborted Builds','Not Built');
+        $metric_display_colors = array('green','#C34A2C','grey','black','blue');
+    
+        //include('/Library/WebServer/Documents/gitdocs/Reporting-Tool/artifacts/pathconfig.php');
         $json = json_decode(file_get_contents($this->input_file), true);
         //var_dump($json);
         $temp_xval=array(); $temp_yval=array();
         
         foreach ($this->report_metrics as $report_metric) {
-        
+            //echo $report_metric;
             for ($i = $report_metric; $i < sizeof($json["dimensions"][0]["columns"]); $i=$i+5) {
-                
                 $original_timestamp_start = $json["dimensions"][0]["columns"]["$i"]["start"];
                 $original_timestamp_end = $json["dimensions"][0]["columns"]["$i"]["end"];
                 $timestamp_start          = (int) substr($original_timestamp_start, 0, -3);
@@ -51,11 +52,16 @@ class jenkinsTransform extends transform{
         	    array_push($temp_xval,$xval);
         	    array_push($temp_yval,$yval);
             }
-            $temp_config['chart']['series'][$report_metric]['data']  = array_reverse($temp_yval);
+            $newItem = array('name'=>$metric_display_names[$report_metric],
+                            'align'=>'left',
+                            'data'=>array_reverse($temp_yval),
+                            'color'=>$metric_display_colors[$report_metric]
+                            );
+            array_push($temp_config['chart']['series'],$newItem);
+            //$temp_config['chart']['series'][$report_metric]['data']  = array_reverse($temp_yval);
             $temp_yval=array();
+
         }
-        //$temp_config = array_reverse($temp_config['chart']['xAxis']['categories']);
-        //$temp_config = array_reverse($temp_config['chart']['series'][0]['data']);
         $temp_config['chart']['xAxis']['categories'] = array_reverse($temp_xval);       
         //$res = $this->writeJSONData($temp_config);
         return json_encode($temp_config);
