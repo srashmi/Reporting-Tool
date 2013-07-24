@@ -12,8 +12,8 @@
 <body>
 <h2>Dashboard</h2>
 <nav>
-  <a href="/gitdocs/Reporting-Tool/artifacts/dashboardFrame2.php">All</a> |
-  <a href="/apim/">APIM</a> |
+  <a href="/gitdocs/Reporting-Tool/artifacts/dashboardFrame2.php?project=all">All</a> |
+  <a href="/gitdocs/Reporting-Tool/artifacts/dashboardFrame2.php?project=apim">APIM</a> |
   <a href="/bde/">BDE</a> |
   <a href="/cms/">CMS</a> |
   <a href="/cst/">CST</a> |
@@ -34,13 +34,15 @@ include($panel_builder);
 include($jenkins_transform); 
 include($panel);
 
+$project = $_GET["project"];
+//echo "project: "; echo $project;
 $temp_config = array( 'admin' => array(
 										'panel' => 1,
-										
+										'project' =>$project
 										), //admin
 					  'range'=> array(
-					  					'start' => '07-07-13', //MM-DD-YY
-					  					'end' => '07-07-13',
+					  					'start' => '01/06/13', // MM/DD/YY
+					  					'end' => '07/17/13',
 					  				), //range
 					  'aggregateBy' => 'hour',
 					  'chart' => array('chart'=>array('type' => 'line'
@@ -91,38 +93,60 @@ $temp_config = array( 'admin' => array(
 $panel1_config = $temp_config;
 $panel1_config['admin']['panel']=1;
 $panel1_config['chart']['title']['text'] = 'Build Statistics - All Jobs';
-array_push($panel1_config['chart']['chart'], 'width');
-$panel1_config['chart']['chart']['width'] = 2500;
+//array_push($panel1_config['chart']['chart'], 'width');
+//$panel1_config['chart']['chart']['width'] = 2500;
+$panel1_config['range']['start'] = '06/01/13';
+$panel1_config['range']['end'] = '07/30/13';
 
 //Panel 2
 $panel2_config = $temp_config;
 $panel2_config['admin']['panel']=2;
+$panel2_config['range']['start'] = '06/01/13';
+$panel2_config['range']['end'] = '07/14/13';
 $panel2_config['chart']['title']['text'] = 'Build Statistics - CI';
+//array_push($panel2_config['chart']['chart'], 'width');
+//$panel2_config['chart']['chart']['width'] = 2500;
 
 //Panel 3
 $panel3_config = $temp_config;
 $panel3_config['admin']['panel']=3;
 $panel3_config['chart']['title']['text'] = 'Build Statistics - PR';
+//array_push($panel3_config['chart']['chart'], 'width');
+//$panel3_config['chart']['chart']['width'] = 2500;
+$panel2_config['range']['start'] = '06/01/13';
+$panel2_config['range']['end'] = '07/14/13';
 
 //Panel 4
 $panel4_config = $temp_config;
 $panel4_config['admin']['panel']=4;
 $panel4_config['chart']['title']['text'] = 'Build Statistics - Master';
+//array_push($panel4_config['chart']['chart'], 'width');
+//$panel4_config['chart']['chart']['width'] = 2500;
+$panel2_config['range']['start'] = '06/01/13';
+$panel2_config['range']['end'] = '07/14/13';
 
 // panelObject = new Panel(transformationObj, panelConfig)
-// jenkinsTransformObject = new jenkinsTransform(array('success'|'failure'|'unstable'|'aborted'|'not_built'|'all'),'ci','master','pr','sonar')
+// jenkinsTransformObject = new jenkinsTransform(project_name_from_selection,array('success'|'failure'|'unstable'|'aborted'|'not_built'|'all'),'ci','master','pr','sonar')
+ 
+ // $panels = array(
+ // 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure'),'all'), $panel1_config),
+ // 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure','not_built'),'ci'), $panel2_config),
+ // 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure','aborted'),'pr'), $panel3_config),
+ // 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure'),'master'), $panel4_config)
+ // );
+
  
  $panels = array(
- 	new Panel(new jenkinsTransform(array('success','failure'),'all'), $panel1_config),
- 	new Panel(new jenkinsTransform(array('success','failure','unstable','aborted'),'ci'), $panel2_config),
- 	new Panel(new jenkinsTransform(array('success','failure','aborted'),'pr'), $panel3_config),
- 	new Panel(new jenkinsTransform(array('success','failure'),'master'), $panel4_config)
+ 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success'),'all'), $panel1_config),
+ 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success'),'ci'), $panel2_config),
+ 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success'),'pr'), $panel3_config),
+ 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success'),'master'), $panel4_config)
  );
+
 
 foreach($panels as $panel) {
 	$panel->printHtml();
 }
 ?>
-
 </body>
 </html>

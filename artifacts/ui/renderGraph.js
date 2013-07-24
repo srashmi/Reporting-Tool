@@ -17,5 +17,7 @@ function makeGraph(config){
 			}
 			console.log("x= "+ x+ "leng="+(obj.chart.series).length);
 			obj.chart.series = x;	
+			console.log(JSON.stringify(chartdata));
 			$("#"+renderingPanel).highcharts(chartdata);
+
 }

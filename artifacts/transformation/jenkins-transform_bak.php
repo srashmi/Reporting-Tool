@@ -63,38 +63,7 @@ class jenkinsTransform extends transform{
 
     }
 
-    public function aggregator($config,$xval,$yval){
-            
-            $plotValues = array('x'=>'','y'=>'');
-            //$start = date('m/d', $timestamp_start);//."-".date('m/d', $timestamp_end);
-            //$end = date('m/d', $timestamp_end);
-            //echo $xval,",",$yval;
-            //echo nl2br("\n\n");
-            $date = date_create($config['range']['end']);
-            //echo date_format($date, 'Y-m-d H:i:s');
-            echo nl2br("\n\n");
-            echo $xval,",",date_format($date,'m/d');
-            $y=0;
-            for($i=$xval;$i<=$dateRangeEnd;$i=i+7){
-                for($j=0;$j<7;$j++){
-                    $y = $y + $json["dimensions"][0]["values"][$j];
-                    //echo "y=", $yval;
-                }
-                $x=i+7;
-                array_push($plotValues['x'],$x);
-                array_push($plotValues['y'],$y);
-
-                echo "x and y: ", $x,",",$y;
-                echo nl2br("\n\n"); 
-            } 
-            return $plotValues;
-
-        }
-
-
-
     public function transformData($temp_config){
-
         global $report_metric; 
         $metric_display_names = array('Successful Builds','Failed Builds','Unstable Builds','Aborted Builds','Not Built');
         $metric_display_colors = array('green','#C34A2C','grey','black','blue');
@@ -103,13 +72,11 @@ class jenkinsTransform extends transform{
         //echo "input file: "; echo $this->input_file;    
         $json = json_decode(file_get_contents($this->input_file), true);
         //var_dump($json);
-         $temp_xval=array(); 
-         $temp_yval=array();
+        $temp_xval=array(); $temp_yval=array();
         
         foreach ($this->report_metrics as $report_metric) {
             //echo $report_metric; 
-            global $display2;$count1=0;
-
+            global $display2;
             for ($i = $report_metric; $i < sizeof($json["dimensions"][0]["columns"]); $i=$i+5) {
                 $original_timestamp_start = $json["dimensions"][0]["columns"]["$i"]["start"];
                 $original_timestamp_end = $json["dimensions"][0]["columns"]["$i"]["end"];
@@ -120,35 +87,21 @@ class jenkinsTransform extends transform{
                     
                     $timestamp_start          = (int) substr($original_timestamp_start, 0, -3);
                     $timestamp_end         = (int) substr($original_timestamp_end, 0, -3);
-                    $xval = date('m/d/y', $timestamp_start);//."-".date('m/d', $timestamp_end);
+                    $xval = date('m/d/y', $timestamp_end);//."-".date('m/d', $timestamp_end);
                     $yval = $json["dimensions"][0]["values"][$i];
-                    
+
                     //original
                     array_push($temp_xval,$xval);
                     array_push($temp_yval,$yval);
                     $display2=$display;
-
                 }
+                
             }
+            
             if($display2){
-
-                $plot_yvals=array();$plot_xvals=array();$temp=0;
-
-                for($i=0;$i<sizeof($temp_xval);$i=$i+7){
-                    for($j=0;$j<7;$j++){
-                        $temp=$temp+ $temp_yval[$i+$j];
-                        //echo $temp_yval[$i+$j],",",$temp,"--";
-                        //Echo nl2br("\n\n");
-                    }
-                    array_push($plot_yvals, $temp);
-                    array_push($plot_xvals, $temp_xval[$i+7]);
-                    $temp=0;
-                }
-                           
-                //original
                 $newItem = array('name'=>$metric_display_names[$report_metric],
                                 'align'=>'left',
-                                'data'=>array_reverse($plot_yvals),
+                                'data'=>array_reverse($temp_yval),
                                 'color'=>$metric_display_colors[$report_metric]
                                 );
                 array_push($temp_config['chart']['series'],$newItem);
@@ -157,15 +110,10 @@ class jenkinsTransform extends transform{
             $temp_yval=array();
 
         }
-        $temp_config['chart']['xAxis']['categories'] = array_reverse($plot_xvals);   
-
-        
+        $temp_config['chart']['xAxis']['categories'] = array_reverse($temp_xval);       
         //$res = $this->writeJSONData($temp_config);
         //var_dump($temp_config);
-        foreach ($temp_config['chart']['xAxis']['categories'] as $pr){
-            echo $pr;
-            echo nl2br("\n\n");
-        }
+        
         return json_encode($temp_config);
     }
 
