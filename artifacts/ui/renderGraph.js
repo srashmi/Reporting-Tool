@@ -1,19 +1,23 @@
 function makeGraph(config){
 
 			var obj = config;
-	  		
 			var renderingPanel="graph"+obj.admin.panel;
-			console.log("renderingPanel: ",renderingPanel);
+			var chartdata = obj.chart;
 			
+
+			// For debugging only
+			
+			console.log("renderingPanel: "+renderingPanel);
+			console.log("chartdata: "+ chartdata);	
 			x = [];
+			console.log("Test!!! "+obj.chart.series);
 			for( var i in obj.chart.series ) {
     			x[i] = obj.chart.series[i];
     			console.log(obj.chart.series[i]);
 			}
 			console.log("x= "+ x+ "leng="+(obj.chart.series).length);
 			obj.chart.series = x;	
-
-			var chartdata = obj.chart;
-			console.log("chartdata: ", chartdata);	
+			console.log(JSON.stringify(chartdata));
 			$("#"+renderingPanel).highcharts(chartdata);
+
 }
