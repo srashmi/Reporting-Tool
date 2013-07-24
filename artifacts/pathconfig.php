@@ -4,7 +4,7 @@ $base = "/Library/WebServer/Documents/gitdocs/Reporting-Tool";
 // Artifact files
 $collector = $base."/artifacts/collectors/collector.php";
 $dashboard_frame = $base."/artifacts/dashboardFrame.php";
-$jenkins_transform = $base."/artifacts/transformation/jenkins-transform.php";
+$jenkins_transform = $base."/artifacts/transformation/jenkins_transformer2.php";
 $jenkins_getter = $base."/artifacts/collectors/jenkinsGetter.php";
 $panel_builder = $base."/artifacts/ui/panelBuilder.php";
 $transform = $base."/artifacts/transformation/transform.php";

@@ -128,20 +128,17 @@ $panel2_config['range']['end'] = '07/14/13';
 // panelObject = new Panel(transformationObj, panelConfig)
 // jenkinsTransformObject = new jenkinsTransform(project_name_from_selection,array('success'|'failure'|'unstable'|'aborted'|'not_built'|'all'),'ci','master','pr','sonar')
  
- // $panels = array(
- // 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure'),'all'), $panel1_config),
- // 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure','not_built'),'ci'), $panel2_config),
- // 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure','aborted'),'pr'), $panel3_config),
- // 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure'),'master'), $panel4_config)
- // );
-
- 
  $panels = array(
- 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success'),'all'), $panel1_config),
- 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success'),'ci'), $panel2_config),
- 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success'),'pr'), $panel3_config),
- 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success'),'master'), $panel4_config)
+ 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure'),'all'), $panel1_config),
+ 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure','not_built'),'ci'), $panel2_config),
+ 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure','aborted'),'pr'), $panel3_config),
+ 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure'),'master'), $panel4_config)
  );
+
+// $panels = array(
+//   	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure','aborted'),'ci'), $panel1_config),
+  	
+//  ); 
 
 
 foreach($panels as $panel) {
