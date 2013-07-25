@@ -47,6 +47,38 @@ class jenkinsTransform{
 			return false;	
 	}
 
+	public function aggregator($temp_config){
+
+		$array_x=$temp_config['chart']['xAxis']['categories'];
+		$array_y=$temp_config['chart']['series'];
+		//var_dump($array_x);
+		//var_dump($array_y);
+		foreach ($array_y as $key) {
+			# code...
+			//var_dump($key["data"]);
+			//echo nl2br("\n\n");
+		}
+		$y=0;	$subtotal_y=array();
+		foreach($array_y as $status){
+		for($i=0;$i<sizeof($array_x);$i=$i+7){
+			//echo $i,",";
+			for($j=$i;$j<$i+7;$j++){
+				$y=$y+$status['data'][$j];
+				echo $status['data'][$j];
+				array_push($subtotal_y,$y);
+				echo nl2br("\n\n");
+			}
+			//var_dump($subtotal_y[0]);
+			echo nl2br("\n\n-----");
+		}
+		//echo $y,",";
+		echo nl2br("\n\n$$$$$$");
+	}
+		
+		//weekly
+
+	}
+
 	public function transformData($temp_config){
 		include('/Library/WebServer/Documents/gitdocs/Reporting-Tool/artifacts/pathconfig.php');
 		$base_path = $base."/data/granular/".$this->project;
@@ -55,16 +87,16 @@ class jenkinsTransform{
 		$files = array('success.txt','failure.txt','unstable.txt','aborted.txt','not_built.txt');
         
         $temp_x=array();
-        $temp_y=array();
+        $temp_y=array();$xcount=0;
 		foreach ($this->report_metrics as $report_metric) {
 
-			$xcount=0;
+			//echo $xcount;
 			
 			$this->input_file = $base_path."/".$this->job."/".$files[$report_metric];
 			//echo $this->input_file;
 			$raw_data = json_decode(file_get_contents($this->input_file), true);
 			//var_dump($raw_data);
-			
+			$j=0;
 			foreach ($raw_data['date'] as $dateValue){
 				$i=0;
 				$filterResult = $this->dateFilter($temp_config['range']['start'],$temp_config['range']['end'],$dateValue);
@@ -74,20 +106,32 @@ class jenkinsTransform{
 			                                'color'=>$metric_display_colors[$report_metric]
 			                                );
 				if($filterResult){
-					if($xcount==0) 
+					//echo $xcount;
+					if($xcount==0) {
+						//echo "pushing";
 						array_push($temp_config['chart']['xAxis']['categories'],$filterResult);
+					}
 					array_push($newItem['data'],$raw_data['builds'][$i]);
 				    
 		        }
 		        $i++;
+		        
+		        
 		    }
 		    array_push($temp_config['chart']['series'],$newItem);
+		    
+			//var_dump($array_y);
 		    $xcount++;
+
 		}
+		//$xcount++;
+		
+		$this->aggregator($temp_config);
 		
 		//var_dump($temp_config['chart']['xAxis']['categories']);
-
+		//array_push($temp_config['chart']['xAxis']['categories'],$temp_x);
 		
+		//aggregator($temp_config);
 		return json_encode($temp_config);
 
 	}

@@ -93,8 +93,8 @@ $temp_config = array( 'admin' => array(
 $panel1_config = $temp_config;
 $panel1_config['admin']['panel']=1;
 $panel1_config['chart']['title']['text'] = 'Build Statistics - All Jobs';
-//array_push($panel1_config['chart']['chart'], 'width');
-//$panel1_config['chart']['chart']['width'] = 2500;
+array_push($panel1_config['chart']['chart'], 'width');
+$panel1_config['chart']['chart']['width'] = 2500;
 $panel1_config['range']['start'] = '06/01/13';
 $panel1_config['range']['end'] = '07/30/13';
 
@@ -128,17 +128,17 @@ $panel2_config['range']['end'] = '07/14/13';
 // panelObject = new Panel(transformationObj, panelConfig)
 // jenkinsTransformObject = new jenkinsTransform(project_name_from_selection,array('success'|'failure'|'unstable'|'aborted'|'not_built'|'all'),'ci','master','pr','sonar')
  
- $panels = array(
- 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure'),'all'), $panel1_config),
- 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure','not_built'),'ci'), $panel2_config),
- 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure','aborted'),'pr'), $panel3_config),
- 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure'),'master'), $panel4_config)
- );
+ // $panels = array(
+ // 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure'),'all'), $panel1_config),
+ // 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure','not_built'),'ci'), $panel2_config),
+ // 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure','aborted'),'pr'), $panel3_config),
+ // 	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure'),'master'), $panel4_config)
+ // );
 
-// $panels = array(
-//   	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure','aborted'),'ci'), $panel1_config),
+$panels = array(
+  	new Panel(new jenkinsTransform($panel1_config['admin']['project'],array('success','failure','aborted'),'master'), $panel1_config),
   	
-//  ); 
+ ); 
 
 
 foreach($panels as $panel) {
