@@ -12,6 +12,7 @@ class Panel {
 
 	function printHtml() {
 		$config = $this->transformer->transformData($this->panel_config); 
+		//var_dump($config);
 		buildPanel($config);
 		echo "<script type=\"text/javascript\">makeGraph(",$config,")</script>";
 	}
