@@ -15,6 +15,7 @@ class Panel {
 		//var_dump($config);
 		buildPanel($config);
 		echo "<script type=\"text/javascript\">makeGraph(",$config,")</script>";
+		
 	}
 
 	function buildPanel($config) {

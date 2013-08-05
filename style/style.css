@@ -1,24 +1,40 @@
 section{
-width:500px;
+width:730px;
 height:315px;
 border-style:solid;
 border-color:black;
+margin-top: 13px;
 }
 
 div{
-width:450px;
-height:250px;
+width:700px;
+height:290px;
 }
-#graph1{
-position: absolute;
-margin-top: 0px;
-margin-left: 30px;
+#one{
+	width:200px;
+	height:40px;
+}
+#two{
+	width: 80px;
+	height:10px;
+	margin-left: 260px;
+}
+#graph1,#graph2,#graph3,#graph4{
+position: relative;
+margin-top: 10px;
+margin-left: 10px;
 overflow: scroll;
+
 }
 
-#panel2{
+/*#panel2{
 position:absolute;
 margin-left:515px;
+margin-top:-320px;
+}*/
+#panel2{
+position:absolute;
+margin-left:740px;
 margin-top:-320px;
 }
 
@@ -29,5 +45,42 @@ margin-top:5px;
 #panel4{
 position:absolute;
 margin-top:-320px;
-margin-left:515px;
+margin-left:740px;
 }
+
+ul
+{
+list-style-type:none;
+margin: 0px;
+padding:0px;
+width: 200px;
+margin-bottom: 10px;
+}
+li
+{
+display:inline;
+}
+h2{
+	padding: 0px;
+	width:10px;
+	margin-bottom: 0px;
+}
+select{
+	
+	margin-bottom: 0px;
+	width: 80px;
+	
+}
+form{
+	margin-top: -38px;
+}
+.selected_project{
+	font-weight: bolder;
+	font-size: 20px;	
+}
+
+/*#panel4{
+position:absolute;
+margin-top:-320px;
+margin-left:515px;
+}*/

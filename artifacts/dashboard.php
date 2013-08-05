@@ -6,14 +6,14 @@
 <script type="text/javascript" src="..\artifacts\ui\renderGraph.js"></script>
 <script type="text/javascript" src="..\artifacts\ui\js\highcharts.js"></script>
 <script type="text/javascript" src="..\artifacts\ui\js\modules\exporting.js"></script>
-<link rel="stylesheet" type="text/css" href="..\style\style2.css">
+<link rel="stylesheet" type="text/css" href="..\style\style.css">
 <title>Dashboard</title>
 </head>
 <body>
 <h2>Dashboard</h2>
 <nav>
-  <a href="/gitdocs/Reporting-Tool/artifacts/dashboardFrame2.php?project=all">All</a> |
-  <a href="/gitdocs/Reporting-Tool/artifacts/dashboardFrame2.php?project=apim">APIM</a> |
+  <a href="/gitdocs/Reporting-Tool/artifacts/dashboard.php?project=all">All</a> |
+  <a href="/gitdocs/Reporting-Tool/artifacts/dashboard.php?project=apim">APIM</a> |
   <a href="/bde/">BDE</a> |
   <a href="/cms/">CMS</a> |
   <a href="/cst/">CST</a> |
@@ -27,6 +27,7 @@
   <a href="/syseng/">System Engineering</a> |
   <a href="/um/">UM</a>
 </nav> 
+
 <?php 
 include('pathconfig.php');
 include($panel_builder);
@@ -35,6 +36,8 @@ include($jenkins_transform);
 include($panel);
 
 $project = $_GET["project"];
+if($project==NULL)
+	$project='all';
 //echo "project: "; echo $project;
 $temp_config = array( 'admin' => array(
 										'panel' => 1,
@@ -44,7 +47,7 @@ $temp_config = array( 'admin' => array(
 					  					'start' => '01/06/13', // MM/DD/YY
 					  					'end' => '07/17/13',
 					  				), //range
-					  'aggregateBy' => 'week',
+					  'aggregateBy' => "month",
 					  'chart' => array('chart'=>array('type' => 'column'
 					  							
 					  							),
